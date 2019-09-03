@@ -6,7 +6,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1-stretch AS build
 WORKDIR /src
 COPY ["MicroWeb/MicroWeb.csproj", "MicroWeb/"]
-COPY ["MicroApi/MicroApi.csproj", "MicroApi/"]
 RUN dotnet restore "MicroWeb/MicroWeb.csproj"
 COPY . .
 WORKDIR "/src/MicroWeb"

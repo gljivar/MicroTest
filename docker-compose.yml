@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  microweb:
+    image: ${DOCKER_REGISTRY-}microweb
+    build:
+      context: .
+      dockerfile: MicroWeb/Dockerfile
+
+  microapi:
+    image: ${DOCKER_REGISTRY-}microapi
+    build:
+      context: .
+      dockerfile: MicroApi/Dockerfile
+

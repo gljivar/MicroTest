@@ -2,16 +2,30 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MicroWeb.Models;
+using Newtonsoft.Json;
 
 namespace MicroWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        HttpClient client;
+
+        public HomeController(IHttpClientFactory httpClientFactory)
         {
+            client = httpClientFactory.CreateClient("Micro");
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var response = await client.GetAsync("/api/values");
+            var content = await response.Content.ReadAsStringAsync();
+
+            ViewData["Values"] = JsonConvert.DeserializeObject<string>(content);
             return View();
         }
 
