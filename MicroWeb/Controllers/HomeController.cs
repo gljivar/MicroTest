@@ -25,7 +25,7 @@ namespace MicroWeb.Controllers
             var response = await client.GetAsync("/api/values");
             var content = await response.Content.ReadAsStringAsync();
 
-            ViewData["Values"] = JsonConvert.DeserializeObject<string>(content);
+            ViewData["Values"] = JsonConvert.DeserializeObject<IEnumerable<string>>(content);
             return View();
         }
 
